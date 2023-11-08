@@ -1,6 +1,6 @@
-#Traget Group
+#Traget Group=containers
 resource "aws_lb_target_group" "bank-app" {
-  name        = "url-app"
+  name        = "dep7app"
   port        = 8000
   protocol    = "HTTP"
   target_type = "ip"
@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "bank-app" {
 
 #Application Load Balancer
 resource "aws_alb" "bank_app" {
-  name               = "url-lb"
+  name               = "dep7lb"
   internal           = false
   load_balancer_type = "application"
 
