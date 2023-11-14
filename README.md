@@ -10,23 +10,14 @@ With both infrastructures deployed, is there anything else we should add to our 
 
 
 ___________________
-&emsp;&emsp;&emsp;&emsp;	Instead of manually building, testing, and deploying in previous deployments, I utilized Terraform to automate the creation of a Jenkins agent infrastructure across 6 different servers within the N. Virginia and Oregon regions available in AWS cloud. I focused on reducing reducing resource contention by creating a larger Jenkins infrastructure compared to my Deployment 5.1. Using terraform to create my Jenkins manager server and main agent server in one availability zone, and additionally using terraform on my main agent server to create 4 more Jenkins agent servers in east and west regions, reduced my chances at having a single point of failure in case one of my AZ's has network failures. It also helps decrease my chances of downtime because if one server in one region goes down, I have another server available for incoming traffic. The use of my Jenkins agent nodes also help distribute the workload across the servers and provides reliability in the production of my web application. Lastly, I optimized my infrastructure further by creating load balancers for each availability zone to improve the performace and reliability of my web applications deployed on each server by evenly distributing incoming traffic so as not to overload my servers with client and user requests. 
+&emsp;&emsp;&emsp;&emsp;	To provision my Jenkins infrastructure in my default VPC and utilize Terraform and Docker to automate the creation of my infrastructure needed to deploy my application through my containers managed through AWS ECS(Elastic container service). I utillized Terraform to construct my Jenkins infrasructure, with a main Jenkins server that manages 2 distributed and decentralized agent nodes on 2 separate servers with Terraform and Docker installed on each. These agent nodes allowed me to automate the creation of my application infrastructure listed within [intTerraform](). Compared to previous deployments, using Docker allowed me to access my application through my load balancer on my container. Instead of having to manually install software and include the files that my application needed to work with Flask and Gunicorn, Docker created an image of my GitHub repo, my version control system. Providing Jenkins with my GitHub credentials, allows Jenkins to integrate with the latest version of my application code files to orchestrate my pipeline that tests, builds, and manages my application deployment on [ECS](). Meanwhile my ECS cluster, configured with services and tasks definitions, uses AWS Fargate to connect and manage all the components of my application infrastructure --my Jenkins infrastructure and my container housing my application's image-- to deploy my application.    
 
-______________________________________
-### <ins>PURPOSE:</ins>
 ________________________________________
-Description:
-
-The first server or main server was installed with Jenkins and Deadsnakes PPA for the latest Python package and its dependencies. The main server runs Jenkins where we create the agent nodes, with one of each attached to the other two instances. The second and third instances were also installed with Deadsnakes PPA along with the Java Runtime Environment(JRE) package so the server communicates properly with the Jenkins agents nodes. The [Jenkinsfile](https://github.com/DANNYDEE93/Deployment-5.1/blob/main/Jenkinsfile) and [app.py](https://github.com/DANNYDEE93/Deployment-5.1/blob/main/app.py) scripts use the agent nodes through the Jenkins main server to import Flask for development and install Gunicorn on the agent servers. The agent nodes use SSH to connect with the agent servers and the nodes run the builds and deploy on the Gunicorn production web server. Instead of using commands to establish an SSH connection in the Jenkinsfile like in my [Deployment5](https://github.com/DANNYDEE93/Deployment5.git), I accessed the SSH connection through the Jenkins agent nodes. Once installed on my Ubuntu server, the agent nodes become Linux-based and use Flask (python framework) to develop and Gunicorn to deploy my Python web application. 
-
- _________________________________
 ### <ins>ISSUES:</ins>
-__________________________________
-* Terraform:
+________________________________________
+* Terraform: I had issues figuring out how to connect my Jenkins infrastructure to my default VPC. I realized that I need to use the specific security group associated with it or Terraform won't recognize the resource of a different security group. 
 
 * Jenkins agent nodes:
-
-* Deployment Process: After a successful test in Jenkins, my server was still unable to serve up the web application. I needed to run my Jenkins build multiple times, and upgrade my agent server, and then the application worked.
 ________________________________________________________________________________
 
 ### <ins> **STEPS FOR WEB APPLICATION DEPLOYMENT** </ins>
