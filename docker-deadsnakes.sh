@@ -17,6 +17,9 @@ sudo apt-get update
 #install latest version
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+#add current user or ubuntu to the docker group on the instance
+sudo usermod -aG docker
+
 sudo apt update
 
 #download java runtime environment for jenkins agent
