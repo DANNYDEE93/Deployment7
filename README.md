@@ -44,7 +44,7 @@ __________________________________________________________________________
 * Terraform is a great tool to automate the building of your application infrastructure instead of manually creating new instances with different installations separately. For this application, I wrote a terraform [Jenkins.tf](Jenkins.tf) file script in VS code with defined variables and values. This infrastructure included 3 servers -- one for the [Jenkins manager](jenkins-deadsnakes.sh) and the other two installed with [Terraform](terraform-java.sh) and [Docker](docker-deadsnakes.sh), provisioned to connect to my Jenkins agent nodes.
 * My second set of terraform files was for my application infrastructure which included: 
 
-With a public and private subnet each in 2 separate availability zones ensures that our application is available in case one AZ goes down in the [VPC](intTerraform/vpc.tf): 
+* With a public and private subnet each in 2 separate availability zones ensures that our application is available in case one AZ goes down in the [VPC](intTerraform/vpc.tf): 
 **2 AZ's 
 **2 Public Subnets
 **2 Private Subnets
@@ -54,7 +54,7 @@ With a public and private subnet each in 2 separate availability zones ensures t
 **2 Route Table (for each subnet)*
 **2 Security Groups (with ports: 80 for the [ALB](intTerraform/ALB.tf) to listen through and direct traffic to port 8000 for Gunicorn production web server)*
 
-[**main.tf**](intTerraform/main.tf) created the cluster environment that housed our 2 tasks/containers defined in our service resource block which is connected to our application load balancer listening on port 8 and directs traffic to port 8000. 
+* [**main.tf**](intTerraform/main.tf) created the cluster environment that housed our 2 tasks/containers defined in our service resource block which is connected to our application load balancer listening on port 8 and directs traffic to port 8000. 
 
 **Configure RDS Database**
 ____________________________________________________________________________
@@ -106,7 +106,7 @@ ___________________________________________
 ### <ins>CONCLUSION & OPTIMIZATION:</ins>
 _____________________________________________
 
-Jenkins was particularly important in the optimization and error handling of the deployment. The use of DockerHub and Terraform gives me a smoother workflow through my pipeline by continuously integrating updated Docker images of my app infrastructure, continuously developing and deploying my app through ECS, and Terraform allows me to automate the code to provision the resources necessary for the applicaiton. Utilizing the AWS RDS Database gives me a 2-tier architecture with three logical layers by separating the database layer on my RDS Database and my application layer on my containerized images accessed through ECS. 
+* Jenkins was particularly important in the optimization and error handling of the deployment. The use of DockerHub and Terraform gives me a smoother workflow through my pipeline by continuously integrating updated Docker images of my app infrastructure, continuously developing and deploying my app through ECS, and Terraform allows me to automate the code to provision the resources necessary for the applicaiton. Utilizing the AWS RDS Database gives me a 2-tier architecture with three logical layers by separating the database layer on my RDS Database and my application layer on my containerized images accessed through ECS. 
 
 * Increased security by housing my containers in my private subnet and RDS Database secures my infrastructure from unwanted access.
 * Makes my infrastructure fault-tolerant by deploying my application in separate availability zones.
