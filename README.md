@@ -54,7 +54,7 @@ __________________________________________________________________________
 * *2 Route Table (for each subnet)*
 * *2 Security Groups (with ports: 80 for the [ALB](intTerraform/ALB.tf) to listen through and direct traffic to port 8000 for Gunicorn production web server)*
 
-* [**main.tf**](intTerraform/main.tf) created the cluster environment that housed our 2 tasks/containers defined in our service resource block which is connected to our application load balancer listening on port 8 and directs traffic to port 8000. 
+* [**main.tf**](intTerraform/main.tf) created the cluster environment that housed our 2 tasks/containers defined in our service resource block which is connected to our application load balancer listening on port 80 and directs traffic to port 8000. 
 
 **Configure RDS Database**
 ____________________________________________________________________________
