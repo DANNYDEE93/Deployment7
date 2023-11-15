@@ -41,18 +41,18 @@ _____________________________________________________________________________
 ### Step 3: Create Jenkins Infrastructure with Terraform:
 __________________________________________________________________________
 	
-* Terraform is a great tool to automate the building of your application infrastructure instead of manually creating new instances with different installations separately. For this application, I wrote a terraform [Jenkins.tf](Jenkins.tf) file script in VS code with defined variables and values. This infrastructure included 3 servers -- one for the [Jenkins manager](jenkins-deadsnakes.sh) and the other two installed with [Terraform](terraform-java.sh) and [Docker](docker-deadsnakes.sh), provisioned to connect to my Jenkins agent nodes.
+* Terraform is a great tool to automate the building of your application infrastructure instead of manually creating new instances with different installations separately. For this application, I wrote a terraform [Jenkins.tf](Jenkins.tf) file script in VS code with defined variables and values. This infrastructure included 3 servers with ports 22(sshing to connect agent servers) and 8080(to access Jenkins browser from manager server). One server was for the [Jenkins manager](jenkins-deadsnakes.sh) and the other two installed with [Terraform](terraform-java.sh) and [Docker](docker-deadsnakes.sh), provisioned to connect to my Jenkins agent nodes.
 * My second set of terraform files was for my application infrastructure which included: 
 
 * With a public and private subnet each in 2 separate availability zones ensures that our application is available in case one AZ goes down in the [VPC](intTerraform/vpc.tf): 
-**2 AZ's 
-**2 Public Subnets
-**2 Private Subnets
-**1 Application Load Balancer (directs traffic to both containers)*
-**1 Internet Gateway (necessary for ingress traffic to reach the application servers/containers on port 8000 located in the private subnet)*
-**1 NAT Gateway (necessary for egreess traffic to go out and return responses to HTTP request that lies in the public subnet in order to connect to have a connection to the internet through the internet gateway)*
-**2 Route Table (for each subnet)*
-**2 Security Groups (with ports: 80 for the [ALB](intTerraform/ALB.tf) to listen through and direct traffic to port 8000 for Gunicorn production web server)*
+* *2 AZ's* 
+* *2 Public Subnets*
+* *2 Private Subnets*
+* *1 Application Load Balancer (directs traffic to both containers)*
+* *1 Internet Gateway (necessary for ingress traffic to reach the application servers/containers on port 8000 located in the private subnet)*
+* *1 NAT Gateway (necessary for egreess traffic to go out and return responses to HTTP request that lies in the public subnet in order to connect to have a connection to the internet through the internet gateway)*
+* *2 Route Table (for each subnet)*
+* *2 Security Groups (with ports: 80 for the [ALB](intTerraform/ALB.tf) to listen through and direct traffic to port 8000 for Gunicorn production web server)*
 
 * [**main.tf**](intTerraform/main.tf) created the cluster environment that housed our 2 tasks/containers defined in our service resource block which is connected to our application load balancer listening on port 8 and directs traffic to port 8000. 
 
