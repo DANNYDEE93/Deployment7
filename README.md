@@ -58,7 +58,7 @@ __________________________________________________________________________
 
 **Configure RDS Database**
 ____________________________________________________________________________
-* Using the AWS RDS Database allowed me to separate my data logical layer from my application servers free up space, and reduce resource contention for processing power (CPU, RAM, MEM). 
+* Using the AWS RDS Database allowed me to separate my data logical layer from my application servers to reduce resource contention for processing power (CPU, RAM, MEM). 
 * This AWS-managed service allowed me not to worry about the operation of the data layer and focus on the rest of the infrastructure.
 * I used the username and password I made for additional security on the database that is also in the private subnet which helps block users from accessing sensitive information, the endpoint for the container/application servers to locate the database system and return the information being requested, and the name of my database in the database files to connect my RDS Database to my application infrastructure:
   
