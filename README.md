@@ -33,7 +33,7 @@ __________________________________________________________________________
 * *git clone* - Used VS code editor to easily make changes to my remote repo on GitHub
 *  *cd .git*, *nano config* - Added my GitHub URL in my .git config file to give VS code permission to push changes to my remote repo on GitHub after creating my terraform files and scripts for my infrastructure.
 *  *git branch* - to make changes in the second branch to make changes before adding to the main branch
-*  *git add .* - to update changes in each branches
+*  *git add .* - to update changes in each branch
 *  *git commit -m "message"* - to finalize changes to repo with message description
 *  *git push* - push changes back to remote GitHub repo  
 
